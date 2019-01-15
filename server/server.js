@@ -20,5 +20,7 @@ massive(CONNECTION_STRING).then((db) => {
     app.listen(SERVER_PORT, () => console.log(`Ducks ready for takeoff! ${SERVER_PORT} blastoff!`))
 })
 
-app.post('/auth/register', ac.register)
+app.post('/auth/register', ac.register);
 app.post('/auth/login', ac.login);
+app.get('/auth/logout', ac.logout);
+app.get('/api/user-data', ac.userData);

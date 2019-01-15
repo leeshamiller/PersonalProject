@@ -11,9 +11,7 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
         let newUserArr = await db.create_user({username, hash})
-        console.log(newUserArr)
         let newUser = newUserArr[0]
-        console.log(newUser)
         req.session.user = {id: newUser.user_id, username: newUser.username}
         res.status(200).send({message: 'logged in', userData: req.session.user, loggedIn: true})
     },
@@ -28,8 +26,19 @@ module.exports = {
         if(!result) {
             res.status(401).send({message: 'Incorrect password.'})
         }
-        let user = accountArr[0];
-        req.session.user = {id: user.user_id, username: user.username}
+        let newUser = accountArr[0];
+        req.session.user = {id: newUser.user_id, username: newUser.username}
         res.status(200).send({message: 'logged in', userData: req.session.user, loggedIn: true})
+    },
+    logout: (req, res) => {
+        req.session.destroy();
+        res.redirect('http://localhost:3000/#/')
+    },
+    userData: (req, res) => {
+        if (req.session.user) {
+            res.status(200).send(req.session.user)
+        } else {
+            res.status(401).send('Please log in')
+        }
     }
 }

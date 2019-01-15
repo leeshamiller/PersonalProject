@@ -4,6 +4,9 @@ username varchar(25),
 pass_hash varchar(50)
 );
 
+alter table users alter COLUMN pass_hash type varchar(100);
+select * from users;
+
 insert into users (username, pass_hash)
 values ('test4', 'test4')
 returning *;
