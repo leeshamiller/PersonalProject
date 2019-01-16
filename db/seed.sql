@@ -18,6 +18,18 @@ title varchar(50),
 area_id serial primary key
 );
 
+select * from areas
+where user_id = 13;
+
+alter table areas alter column title set not null;
+select * from areas;
+
+insert into areas
+(user_id, title)
+values
+(13, 'new area2');
+select * from areas;
+
 create table project (
 area_id integer REFERENCES areas(area_id),
 project_id serial primary key,

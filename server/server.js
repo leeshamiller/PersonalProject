@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
 const ac = require('./auth_ctrl');
+const ctrl = require('./ctrl');
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING} = process.env;
 
@@ -23,4 +24,7 @@ massive(CONNECTION_STRING).then((db) => {
 app.post('/auth/register', ac.register);
 app.post('/auth/login', ac.login);
 app.get('/auth/logout', ac.logout);
-app.get('/api/user-data', ac.userData);
+app.get('/auth/user-data', ac.userData);
+
+app.post('/api/add-area', ac.addArea);
+app.get('/api/get-areas', ac.getAreas);

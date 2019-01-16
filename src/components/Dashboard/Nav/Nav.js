@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { getUserData } from '../../../ducks/reducer';
+import Dashboard from '../Dashboard';
 
 class Nav extends Component {
 
     async componentDidMount() {
-        let res = await axios('/api/user-data');
+        let res = await axios('/auth/user-data');
         this.props.getUserData(res.data)
     }
 
@@ -33,9 +34,13 @@ class Nav extends Component {
                         <Link to='/private/logbook'>
                             <button>Logbook</button>
                         </Link>
+                        <Link to='/private/area'>
+                            <button>Area</button>
+                        </Link>
                         <a href='http://localhost:4321/auth/logout'>
                             <button>Logout</button>
                         </a>
+                        <Dashboard />
                     </div>
                 ) : <p>Please log in. <Link to='/'>homepage</Link></p>
                 }

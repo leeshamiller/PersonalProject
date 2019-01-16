@@ -40,5 +40,31 @@ module.exports = {
         } else {
             res.status(401).send('Please log in')
         }
+    },
+    addArea: async (req, res) => {
+        const { id, title } = req.body;
+        // const { id } = req.session.user
+        // console.log(req.body)
+        const db = req.app.get('db')
+        const userArr = await db.find_user_id({ id })
+        // console.log(req.session)
+        // console.log(userArr)
+        if (req.session.user.id !== userArr[0].user_id) {
+            res.status(401).send('Please log in.')
+        }
+        // console.log(req.body)
+        const newAreaArr = await db.create_area({ id, title })
+        // console.log(newAreaArr)
+        const userArea = newAreaArr.pop()
+        // console.log(userArea)
+        req.session.user = {...req.session.user, title: userArea.title }
+        // console.log(req.session.user)
+        res.status(200).send({ message: 'area created', userData: req.session.user })
+    },
+    getAreas: (req, res) => {
+        const db = req.app.get('db');
+        db.get_areas().then((response) => {
+            res.status(200).send(response)
+        })
     }
 }
