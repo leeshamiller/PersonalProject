@@ -30,11 +30,34 @@ values
 (13, 'new area2');
 select * from areas;
 
+delete from areas
+where area_id = 34;
+select * from areas
+where user_id = 13;
+
+update areas
+set title = 'update works!!!!'
+where area_id = 13
+and user_id = 12;
+select * from areas
+order by area_id;
+
 create table project (
 area_id integer REFERENCES areas(area_id),
 project_id serial primary key,
 title varchar(50)
 );
+
+insert into project
+(area_id, title)
+VALUES
+(91, 'random');
+
+select * from areas a
+inner join project p
+on p.area_id = a.area_id
+where p.area_id is not null
+and a.user_id = 16
 
 create table task (
 project_id integer REFERENCES project(project_id),

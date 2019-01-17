@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+// import AddProject from './AddProject/AddProject';
+// import { getAreas, createArea, } from '../../../ducks/reducer';
 
 class Area extends Component {
     constructor(props) {
@@ -8,32 +10,21 @@ class Area extends Component {
 
         this.state = {
             title: '',
-            areas: [
-                {
-                    user_id: 0,
-                    title: '',
-                    area_id: 0
-                }
-            ]
+            areas: [],
+            editTitle: ''
         }
     }
 
-
-    async componentDidMount() {
-        await this.getAreas()
+    componentDidMount() {
+        return this.getAreas()
     }
 
-     componentDidUpdate(prevProps, prevState) {
-         if (prevState !== this.state) {
-           return this.getAreas()
-        } 
-    }
 
     async getAreas() {
-      let res = await axios.get('/api/get-areas')
-      this.setState({
-          areas: res.data
-      })
+        let res = await axios.get(`/api/get-areas/${this.props.user.id}`)
+        this.setState({
+            areas: res.data
+        })
     }
 
     handleChange(prop, val) {
@@ -46,16 +37,40 @@ class Area extends Component {
         const { title } = this.state;
         let res = await axios.post('/api/add-area', { id: this.props.user.id, title })
         this.setState({
-            areas: [this.props.areas.push(res.data.userData)],
+            areas: res.data,
             title: ''
         })
     }
 
+    deleteArea = async (id) => {
+        let res = await axios.delete(`/api/delete-area/${id}`)
+        this.setState({
+            areas: res.data
+        })
+    }   
+
+    updateArea = async (id) => {
+        const {editTitle} = this.state
+        let res = await axios.put(`/api/update-area/${id}`, {editTitle})
+        this.setState({
+            areas: res.data,
+            editTitle: ''
+        })
+    }
+    
     render() {
         let displayAreas = this.state.areas.map((area, i) => {
             return (
                 <div key={i}>
-                    {area.title}
+                    <h1>{area.title}</h1>
+                    <button onClick={() => this.deleteArea(area.area_id)}>delete</button>
+                    <p>
+                        <input 
+                        value={this.state.editTitle}
+                        onChange={(e) => this.handleChange('editTitle', e.target.value)}
+                        />
+                    </p>
+                    <button onClick={() => this.updateArea(area.area_id)}>Edit Area Title</button>
                 </div>
             )
         })

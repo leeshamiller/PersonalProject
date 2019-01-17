@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import Auth from './components/Auth/Auth';
-import './App.css';
+import './App.scss';
 import Nav from './components/Dashboard/Nav/Nav';
 
 class App extends Component {

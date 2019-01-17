@@ -26,5 +26,10 @@ app.post('/auth/login', ac.login);
 app.get('/auth/logout', ac.logout);
 app.get('/auth/user-data', ac.userData);
 
-app.post('/api/add-area', ac.addArea);
-app.get('/api/get-areas', ac.getAreas);
+app.post('/api/add-area', ctrl.addArea);
+app.get('/api/get-areas/:id', ctrl.getAreas);
+app.delete('/api/delete-area/:id', ctrl.deleteArea);
+app.put('/api/update-area/:id', ctrl.updateArea);
+
+// app.post('/api/add-project', ctrl.addProject);
+// app.get('/api/get-projects/:id', ctrl.getProjects)
