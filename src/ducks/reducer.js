@@ -16,6 +16,7 @@ const GET_USER_DATA = 'GET_USER_DATA';
 const GET_AREAS = 'GET_AREAS';
 const GET_PROJECTS = 'GET_PROJECTS';
 const CREATE_AREA = 'CREATE_AREA';
+// const UPDATE_AREA_TITLE = 'UPDATE_AREA_TITLE';
 
 export function getUserData(userInfo) {
     return {
@@ -49,6 +50,16 @@ export function createArea(user_id, title, area_id) {
     }
 }
 
+// export function updateAreaTitle(id, title) {
+//     return {
+//         type: UPDATE_AREA_TITLE,
+//         payload: {
+//             id,
+//             title
+//         }
+//     }
+// }
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER_DATA:
@@ -59,6 +70,8 @@ export default function reducer(state = initialState, action) {
             return {...state, projects: action.payload}
         case CREATE_AREA:
             return {...state, user_id: action.payload.user_id, title: action.payload.title, area_id: action.payload.area_id}
+        // case UPDATE_AREA_TITLE:
+        //     return {...state, id: action.payload.id, title: action.payload.title}
         default:
             return state
     }

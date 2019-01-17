@@ -3,7 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
 const ac = require('./auth_ctrl');
-const ctrl = require('./ctrl');
+const area_ctrl = require('./area_ctrl');
+const pc = require('./project_ctrl');
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING} = process.env;
 
@@ -26,10 +27,10 @@ app.post('/auth/login', ac.login);
 app.get('/auth/logout', ac.logout);
 app.get('/auth/user-data', ac.userData);
 
-app.post('/api/add-area', ctrl.addArea);
-app.get('/api/get-areas/:id', ctrl.getAreas);
-app.delete('/api/delete-area/:id', ctrl.deleteArea);
-app.put('/api/update-area/:id', ctrl.updateArea);
+app.post('/api/add-area', area_ctrl.addArea);
+app.get('/api/get-areas/:id', area_ctrl.getAreas);
+app.delete('/api/delete-area/:id', area_ctrl.deleteArea);
+app.put('/api/update-area/:id', area_ctrl.updateArea);
 
-// app.post('/api/add-project', ctrl.addProject);
-// app.get('/api/get-projects/:id', ctrl.getProjects)
+// app.post('/api/add-project', pc.addProject);
+// app.get('/api/get-projects/:id', pc.getProjects)

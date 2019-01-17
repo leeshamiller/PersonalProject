@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import UpdateArea from './UpdateArea/UpdateArea';
 // import AddProject from './AddProject/AddProject';
 // import { getAreas, createArea, } from '../../../ducks/reducer';
 
@@ -47,16 +48,18 @@ class Area extends Component {
         this.setState({
             areas: res.data
         })
-    }   
-
-    updateArea = async (id) => {
-        const {editTitle} = this.state
+    }  
+    
+    updateArea = async (id, editTitle) => {
+        // const {editTitle} = this.state;
         let res = await axios.put(`/api/update-area/${id}`, {editTitle})
         this.setState({
             areas: res.data,
             editTitle: ''
         })
+       
     }
+
     
     render() {
         let displayAreas = this.state.areas.map((area, i) => {
@@ -64,13 +67,11 @@ class Area extends Component {
                 <div key={i}>
                     <h1>{area.title}</h1>
                     <button onClick={() => this.deleteArea(area.area_id)}>delete</button>
-                    <p>
-                        <input 
-                        value={this.state.editTitle}
-                        onChange={(e) => this.handleChange('editTitle', e.target.value)}
-                        />
-                    </p>
-                    <button onClick={() => this.updateArea(area.area_id)}>Edit Area Title</button>
+                    <UpdateArea 
+                    area_id={area.area_id}
+                    editTitle={this.state.editTitle}
+                    updateArea={this.updateArea}
+                    />
                 </div>
             )
         })
