@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import UpdateArea from './UpdateArea/UpdateArea';
+import Update from './Update/Update';
 import AddProject from './AddProject/AddProject';
 
 class Area extends Component {
@@ -67,7 +67,7 @@ class Area extends Component {
 
                     <button onClick={() => this.deleteArea(area.area_id)}>delete</button>
 
-                    <UpdateArea 
+                    <Update
                     area_id={area.area_id}
                     editTitle={this.state.editTitle}
                     updateArea={this.updateArea}

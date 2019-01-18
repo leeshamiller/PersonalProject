@@ -31,5 +31,17 @@ module.exports = {
             const deleteProjectArr = await db.delete_project({project_id, area_id})
             return res.status(200).send(deleteProjectArr)
         }
+    },
+    updateProject: async (req, res) => {
+        const {project_id} = req.params;
+        const {area_id} = req.params;
+        const {editTitle} = req.body;
+        const {id: user_id} = req.session.user
+        const db = req.app.get('db');
+
+        if (req.session.user.id) {
+            const updateProject = await db.update_project_title({editTitle, area_id, project_id, user_id})
+            return res.status(200).send(updateProject)
+        }
     }
 }

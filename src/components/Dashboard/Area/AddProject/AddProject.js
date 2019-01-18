@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-// import { getProjects, createProject } from '../../../../ducks/reducer';
+import Update from '../Update/Update';
 
 class AddProject extends Component {
     constructor(props) {
@@ -48,26 +48,40 @@ class AddProject extends Component {
         })
     }
 
+    updateProject = async (editTitle, project_id, area_id) => {
+        let res = await axios.put(`/api/update-project/${project_id}&${area_id}`, {editTitle})
+        this.setState({
+            projects: res.data,
+            editTitle: ''
+        })
+    }
+
     render() {
         const displayProjects = this.state.projects.map((project, i) => {
-            // console.log(project)
             return (
                 <div key={i}>
                     <h2>{project.project_title}</h2>
 
                     <button onClick={() => this.deleteProject(project.project_id, project.area_id)}>delete Project</button>
 
+                    <Update 
+                    project_id={project.project_id}
+                    area_id={project.area_id}
+                    editTitle={this.state.editTitle}
+                    updateProject={this.updateProject}
+                    />
+
                 </div>
             )
         })
         return (
             <div>
-                {displayProjects}
                 <button onClick={() => this.addProject(this.props.id)}>Add Project</button>
                 <input
                     value={this.state.title}
                     onChange={(e) => this.handleChange('title', e.target.value)}
-                />
+                    />
+                    {displayProjects}
             </div>
         )
     }

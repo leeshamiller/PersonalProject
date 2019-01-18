@@ -35,3 +35,4 @@ app.put('/api/update-area/:id', area_ctrl.updateArea);
 app.post('/api/add-project/:id', pc.addProject);
 app.get('/api/get-projects/:id', pc.getProjects);
 app.delete('/api/delete-project/:project_id&:area_id', pc.deleteProject);
+app.put('/api/update-project/:project_id&:area_id', pc.updateProject);
