@@ -3,6 +3,7 @@ module.exports = {
     addArea: async (req, res) => {
         const { id, title } = req.body;
         const db = req.app.get('db')
+        
         if (req.session.user.id !== id) {
             res.status(401).send('Please log in.')
         }

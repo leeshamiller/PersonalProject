@@ -21,6 +21,8 @@ area_id serial primary key
 select * from areas
 where user_id = 13;
 
+
+
 alter table areas alter column title set not null;
 select * from areas;
 
@@ -52,6 +54,9 @@ insert into project
 (area_id, title)
 VALUES
 (91, 'random');
+
+-- alter table project rename column title to project_title;
+
 
 select * from areas a
 inner join project p

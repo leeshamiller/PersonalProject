@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {connect} from 'react-redux';
-import { getProjects, createProject } from '../../../../ducks/reducer';
+import { connect } from 'react-redux';
+// import { getProjects, createProject } from '../../../../ducks/reducer';
 
 class AddProject extends Component {
     constructor(props) {
         super(props)
-        
+
         this.state = {
             title: '',
-            projects: []
+            projects: [],
+            editTitle: ''
         }
     }
 
     componentDidMount() {
-        return this.getProjects()
+        this.getProjects()
     }
 
-    getProjects() {
-        axios.get(`/api/get-projects/${this.props.user.id}`).then((res) => {
-            this.setState({
-                projects: res.data
-            })
+    getProjects = async () => {
+        let res = await axios.get(`/api/get-projects/${this.props.id}`)
+        this.setState({
+            projects: res.data
         })
+
     }
 
     handleChange(prop, val) {
@@ -31,32 +32,47 @@ class AddProject extends Component {
         })
     }
 
-    addProject = async () => {
+    addProject = async (id) => {
         const { title } = this.state;
-        console.log(this.props)
-        let res = await axios.post('/api/add-project', {id: this.props.user.id, title})
+        let res = await axios.post(`/api/add-project/${id}`, { title })
         this.setState({
             projects: res.data,
             title: ''
         })
     }
 
+    deleteProject = async (project_id, area_id) => {
+        let res = await axios.delete(`/api/delete-project/${project_id}&${area_id}`)
+        this.setState({
+            projects: res.data
+        })
+    }
+
     render() {
         const displayProjects = this.state.projects.map((project, i) => {
+            // console.log(project)
             return (
                 <div key={i}>
-                    {project.title}
+                    <h2>{project.project_title}</h2>
+
+                    <button onClick={() => this.deleteProject(project.project_id, project.area_id)}>delete Project</button>
+
                 </div>
             )
         })
         return (
             <div>
-                    {displayProjects}
+                {displayProjects}
+                <button onClick={() => this.addProject(this.props.id)}>Add Project</button>
+                <input
+                    value={this.state.title}
+                    onChange={(e) => this.handleChange('title', e.target.value)}
+                />
             </div>
         )
     }
 }
 
-const mapStateToProps = (reduxState) => reduxState
+const mapStateToProps = (reduxState) => reduxState;
 
-export default connect(mapStateToProps, {getProjects})(AddProject);
+export default connect(mapStateToProps)(AddProject);
