@@ -5,7 +5,11 @@ class UpdateArea extends Component {
         super(props)
 
         this.state = {
-            editTitle: this.props.editTitle
+            editTitle: props.editTitle,
+            editTag: props.editTag,
+            editNotes: props.editNotes,
+            editDate: props.editDate,
+            editCompleted: props.editCompleted
         }
     }
 
@@ -29,13 +33,23 @@ class UpdateArea extends Component {
         })
     }
     
-
+    updateTask() {
+        this.props.updateTask(this.props.project_id, this.props.task_id, this.state.editTitle, this.state.editTag, this.state.editNotes, this.state.editDate, this.state.editCompleted)
+        this.setState({
+            editTitle: '',
+            editTag: '',
+            editNotes: '',
+            editDate: new Date(),
+            editCompleted: false
+        })
+    }
 
 
     render() {
         return (
             <div>
-                {this.props.project_id ? (
+                {
+                    this.props.project_id ? (
                     <div>
                         <p>
                             <input

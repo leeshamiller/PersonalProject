@@ -22,8 +22,7 @@ module.exports = {
         }
     },
     deleteProject: async (req, res) => {
-        const {project_id} = req.params;
-        const {area_id} = req.params
+        const {project_id, area_id} = req.params;
         // console.log(req.params.id)
         const db = req.app.get('db');
 
@@ -33,8 +32,7 @@ module.exports = {
         }
     },
     updateProject: async (req, res) => {
-        const {project_id} = req.params;
-        const {area_id} = req.params;
+        const {project_id, area_id} = req.params;
         const {editTitle} = req.body;
         const {id: user_id} = req.session.user
         const db = req.app.get('db');

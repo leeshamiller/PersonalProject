@@ -5,6 +5,8 @@ const massive = require('massive');
 const ac = require('./auth_ctrl');
 const area_ctrl = require('./area_ctrl');
 const pc = require('./project_ctrl');
+const tc = require('./task_ctrl');
+const tabs_ctrl = require('./tabs_ctrl');
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING} = process.env;
 
@@ -36,3 +38,14 @@ app.post('/api/add-project/:id', pc.addProject);
 app.get('/api/get-projects/:id', pc.getProjects);
 app.delete('/api/delete-project/:project_id&:area_id', pc.deleteProject);
 app.put('/api/update-project/:project_id&:area_id', pc.updateProject);
+
+app.get('/api/get-tasks/:id', tc.getTasks);
+app.post(`/api/add-task/:id`, tc.addTask);
+app.delete('/api/delete-task/:project_id&:task_id', tc.deleteTask);
+// app.put('/api/update-project/:t_project_id&:task_id', tc.updateTask);
+
+app.get(`/api/get-Inbox/:id&:current_date`, tabs_ctrl.getInbox);
+app.get('/api/get-Today/:id&:current_date', tabs_ctrl.getToday);
+app.get('/api/get-Logbook/:id&:current_date', tabs_ctrl.getLogbook);
+app.get('/api/get-Someday/:id&:current_date', tabs_ctrl.getSomeday);
+app.get('/api/get-Upcoming/:id&:current_date', tabs_ctrl.getUpcoming);

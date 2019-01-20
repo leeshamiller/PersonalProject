@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Tabs from '../Tabs/Tabs';
 
 class Someday extends Component {
     render() {
         return (
             <div>
-                Someday
+                <Tabs
+                header='Someday'
+                />
             </div>
         )
     }

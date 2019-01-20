@@ -9,6 +9,3 @@ where p.area_id is not null
 and a.user_id = ${user_id}
 and a.area_id = ${area_id}
 order by project_id desc;
--- select * from project
--- where area_id = ${area_id}
--- order by project_id desc;

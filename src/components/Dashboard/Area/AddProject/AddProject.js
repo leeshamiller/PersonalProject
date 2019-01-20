@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Update from '../Update/Update';
+import AddTask from '../../AddTask/AddTask';
 
 class AddProject extends Component {
     constructor(props) {
@@ -69,6 +70,10 @@ class AddProject extends Component {
                     area_id={project.area_id}
                     editTitle={this.state.editTitle}
                     updateProject={this.updateProject}
+                    />
+
+                    <AddTask 
+                    id={project.project_id}
                     />
 
                 </div>

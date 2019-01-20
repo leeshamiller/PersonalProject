@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Tabs from '../Tabs/Tabs';
 
 class Logbook extends Component {
     render() {
         return (
             <div>
-                Logbook
+                <Tabs
+                header='Logbook'
+                />
             </div>
         )
     }

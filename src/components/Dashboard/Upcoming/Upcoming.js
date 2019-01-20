@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Tabs from '../Tabs/Tabs';
 
 class Upcoming extends Component {
     render() {
         return (
             <div>
-                Upcoming
+                <Tabs
+                header='Upcoming'
+                />
             </div>
         )
     }
