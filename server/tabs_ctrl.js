@@ -88,5 +88,55 @@ module.exports = {
             return res.status(200).send(addTaskUpcoming)
         }
 
+    },
+    deleteTaskInbox: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const db = req.app.get('db')
+
+        if(t_user_id) {
+            const deleteTaskInbox = await db.delete_task_inbox({t_user_id, task_id})
+            res.status(200).send(deleteTaskInbox)
+        }
+    },
+    deleteTaskSomeday: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const db = req.app.get('db')
+    
+        if(t_user_id) {
+            const deleteTaskSomeday = await db.delete_task_someday({t_user_id, task_id})
+            res.status(200).send(deleteTaskSomeday)
+        }
+    },
+    deleteTaskToday: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id, current_date} = req.params;
+        const db = req.app.get('db')
+        
+        if(t_user_id) {
+            const deleteTaskToday = await db.delete_task_today({t_user_id, task_id, current_date})
+            res.status(200).send(deleteTaskToday)
+        }
+    },
+    deleteTaskLogbook: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const db = req.app.get('db')
+        
+        if(t_user_id) {
+            const deleteTaskLogbook = await db.delete_task_logbook({t_user_id, task_id})
+            res.status(200).send(deleteTaskLogbook)
+        } 
+    },
+    deleteTaskUpcoming: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id, current_date} = req.params;
+        const db = req.app.get('db')
+        
+        if(t_user_id) {
+            const deleteTaskUpcoming = await db.delete_task_upcoming({t_user_id, task_id, current_date})
+            res.status(200).send(deleteTaskUpcoming)
+        }
     }
 }

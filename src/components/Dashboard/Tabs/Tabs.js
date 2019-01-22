@@ -12,7 +12,11 @@ class Tabs extends Component {
         date: new Date()
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.getTabsTasks()
+    }
+    
+    getTabsTasks = async () => {
         const current_date = new Date().setHours(23, 59, 59, 999);
         let res = await axios.get(`/api/get-${this.props.header}/${this.props.user}&${current_date}`)
         this.setState({
@@ -47,6 +51,15 @@ class Tabs extends Component {
             tag: '',
             notes: ''
         })
+        this.getTabsTasks()
+    }
+    
+    deleteTabsTask = async (task_id) => {
+        const current_date = new Date().setHours(23, 59, 59, 999);
+        let res = await axios.delete(`/api/delete-task-${this.props.header}/${task_id}&${current_date}`)
+        this.setState({
+            sections: res.data
+        })
     }
 
     render() {
@@ -58,6 +71,7 @@ class Tabs extends Component {
                         {section.t_title}
                         <br />
                         {section.notes}
+                        <button onClick={() => this.deleteTabsTask(section.task_id)}>delete task</button>
                     </div>
                 </div>
             )

@@ -55,3 +55,9 @@ app.post('/api/add-task-Someday/:current_date', tabs_ctrl.addTaskSomeday);
 app.post('/api/add-task-Today/:current_date', tabs_ctrl.addTaskToday);
 app.post('/api/add-task-Logbook/:current_date', tabs_ctrl.addTaskInbox);
 app.post('/api/add-task-Upcoming/:current_date', tabs_ctrl.addTaskUpcoming);
+
+app.delete('/api/delete-task-Inbox/:task_id&:current_date', tabs_ctrl.deleteTaskInbox);
+app.delete('/api/delete-task-Someday/:task_id&:current_date', tabs_ctrl.deleteTaskSomeday);
+app.delete('/api/delete-task-Today/:task_id&:current_date', tabs_ctrl.deleteTaskToday);
+app.delete('/api/delete-task-Logbook/:task_id&:current_date', tabs_ctrl.deleteTaskLogbook);
+app.delete('/api/delete-task-Upcoming/:task_id&:current_date', tabs_ctrl.deleteTaskUpcoming);
