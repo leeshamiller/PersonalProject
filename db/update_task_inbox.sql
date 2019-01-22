@@ -1,3 +1,8 @@
+UPDATE task 
+SET t_title = ${t_title}, 
+tag = ${tag}, 
+notes = ${notes} 
+WHERE task_id = ${task_id};
 select * from task
 where task_date = 'inbox'
 and completed = false
