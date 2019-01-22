@@ -138,9 +138,41 @@ module.exports = {
             const deleteTaskUpcoming = await db.delete_task_upcoming({t_user_id, task_id, current_date})
             res.status(200).send(deleteTaskUpcoming)
         }
-    }
-    // ,
-    // updateTaskInbox: async (req, res) => {
+    },
+    updateTaskInbox: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const {editTitle: t_title, editTag: tag, editNotes: notes} = req.body;
+        const db = req.app.get('db')
 
-    // }
+        
+        if(t_user_id) {
+            const updateTaskInbox = await db.update_task_inbox({t_user_id, task_id, notes, tag, t_title})
+            return res.status(200).send(updateTaskInbox)
+        } 
+    },
+    updateTaskSomeday: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const {editTitle: t_title, editTag: tag, editNotes: notes} = req.body;
+        const db = req.app.get('db')
+    
+        
+        if(t_user_id) {
+            const updateTaskSomeday = await db.update_task_someday({t_user_id, task_id, notes, tag, t_title})
+            return res.status(200).send(updateTaskSomeday)
+        }        
+    },
+    updateTaskLogbook: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const {editTitle: t_title, editTag: tag, editNotes: notes} = req.body;
+        const db = req.app.get('db')
+    
+        
+        if(t_user_id) {
+            const updateTaskLogbook = await db.update_task_logbook({t_user_id, task_id, notes, tag, t_title})
+            return res.status(200).send(updateTaskLogbook)
+        }          
+    }
 }

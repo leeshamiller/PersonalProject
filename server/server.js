@@ -61,3 +61,7 @@ app.delete('/api/delete-task-Someday/:task_id&:current_date', tabs_ctrl.deleteTa
 app.delete('/api/delete-task-Today/:task_id&:current_date', tabs_ctrl.deleteTaskToday);
 app.delete('/api/delete-task-Logbook/:task_id&:current_date', tabs_ctrl.deleteTaskLogbook);
 app.delete('/api/delete-task-Upcoming/:task_id&:current_date', tabs_ctrl.deleteTaskUpcoming);
+
+app.put('/api/update-task-Inbox/:task_id', tabs_ctrl.updateTaskInbox);
+app.put('/api/update-task-Someday/:task_id', tabs_ctrl.updateTaskSomeday);
+app.put('/api/update-task-Logbook/:task_id', tabs_ctrl.updateTaskLogbook);

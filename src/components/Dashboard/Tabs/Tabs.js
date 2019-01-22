@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
+import UpdateTask from './UpdateTask/UpdateTask';
 
 class Tabs extends Component {
 
@@ -9,7 +10,11 @@ class Tabs extends Component {
         t_title: '',
         tag: '',
         notes: '',
-        date: new Date()
+        date: new Date(),
+        editTitle: '',
+        editTag: '',
+        editNotes: '',
+        completed: false
     }
 
     componentDidMount() {
@@ -62,16 +67,33 @@ class Tabs extends Component {
         })
     }
 
+    updateTabsTask = async (task_id, editNotes, editTag, editTitle) => {
+        let res = await axios.put(`/api/update-task-${this.props.header}/${task_id}`, {editNotes, editTag, editTitle})
+        this.setState({
+            sections: res.data,
+            editTitle: '',
+            editTag: '',
+            editNotes: ''
+        })
+    }
+
     render() {
         const displaySections = this.state.sections.map((section, i) => {
             return (
                 <div className="card" key={i}>
                     <div className="card-body">
-                        <input type='checkbox' value='on' />
+                        <input type='checkbox' />
                         {section.t_title}
                         <br />
                         {section.notes}
                         <button onClick={() => this.deleteTabsTask(section.task_id)}>delete task</button>
+                        <UpdateTask 
+                        task_id={section.task_id}
+                        editNotes={this.state.editNotes}
+                        editTag={this.state.editTag}
+                        editTitle={this.state.editTitle}
+                        updateTabsTask={this.updateTabsTask}
+                        />
                     </div>
                 </div>
             )
