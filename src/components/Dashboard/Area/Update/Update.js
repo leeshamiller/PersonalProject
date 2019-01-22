@@ -5,12 +5,19 @@ class UpdateArea extends Component {
         super(props)
 
         this.state = {
+            toggleModal: false,
             editTitle: props.editTitle,
             editTag: props.editTag,
             editNotes: props.editNotes,
             editDate: props.editDate,
             editCompleted: props.editCompleted
         }
+    }
+
+    toggle = () => {
+        this.setState({
+            toggleModal: !this.state.toggleModal
+        })
     }
 
     handleChange(props, val) {
@@ -42,6 +49,7 @@ class UpdateArea extends Component {
             editDate: new Date(),
             editCompleted: false
         })
+        this.toggle()
     }
 
 

@@ -174,5 +174,29 @@ module.exports = {
             const updateTaskLogbook = await db.update_task_logbook({t_user_id, task_id, notes, tag, t_title})
             return res.status(200).send(updateTaskLogbook)
         }          
+    },
+    updateTaskToday: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id, current_date} = req.params;
+        const {editTitle: t_title, editTag: tag, editNotes: notes} = req.body;
+        const db = req.app.get('db')
+    
+        
+        if(t_user_id) {
+            const updateTaskToday = await db.update_task_today({t_user_id, task_id, notes, tag, t_title, current_date})
+            return res.status(200).send(updateTaskToday)
+        }          
+    },
+    updateTaskUpcoming: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id, current_date} = req.params;
+        const {editTitle: t_title, editTag: tag, editNotes: notes} = req.body;
+        const db = req.app.get('db')
+    
+        
+        if(t_user_id) {
+            const updateTaskUpcoming = await db.update_task_upcoming({t_user_id, task_id, notes, tag, t_title, current_date})
+            return res.status(200).send(updateTaskUpcoming)
+        }          
     }
 }

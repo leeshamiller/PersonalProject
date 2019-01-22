@@ -66,9 +66,10 @@ class Tabs extends Component {
             sections: res.data
         })
     }
-
+    
     updateTabsTask = async (task_id, editNotes, editTag, editTitle) => {
-        let res = await axios.put(`/api/update-task-${this.props.header}/${task_id}`, {editNotes, editTag, editTitle})
+        const current_date = new Date().setHours(23, 59, 59, 999);
+        let res = await axios.put(`/api/update-task-${this.props.header}/${task_id}&${current_date}`, {editNotes, editTag, editTitle})
         this.setState({
             sections: res.data,
             editTitle: '',
