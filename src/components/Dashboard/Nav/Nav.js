@@ -5,6 +5,8 @@ import axios from 'axios';
 import { getUserData } from '../../../ducks/reducer';
 import Dashboard from '../Dashboard';
 
+import './Nav.scss';
+
 class Nav extends Component {
 
     async componentDidMount() {
@@ -16,9 +18,9 @@ class Nav extends Component {
 
         const { id } = this.props.user
         return (
-            <div>
+            <div className='nav-container'>
                 { id ? (
-                    <div>
+                    <div id='nav' className='nav'>
                         <Link to='/private/inbox'>
                             <button>Inbox</button>
                         </Link>

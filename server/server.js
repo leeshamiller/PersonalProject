@@ -49,3 +49,9 @@ app.get('/api/get-Today/:id&:current_date', tabs_ctrl.getToday);
 app.get('/api/get-Logbook/:id&:current_date', tabs_ctrl.getLogbook);
 app.get('/api/get-Someday/:id&:current_date', tabs_ctrl.getSomeday);
 app.get('/api/get-Upcoming/:id&:current_date', tabs_ctrl.getUpcoming);
+
+app.post('/api/add-task-Inbox/:current_date', tabs_ctrl.addTaskInbox);
+app.post('/api/add-task-Someday/:current_date', tabs_ctrl.addTaskSomeday);
+app.post('/api/add-task-Today/:current_date', tabs_ctrl.addTaskToday);
+app.post('/api/add-task-Logbook/:current_date', tabs_ctrl.addTaskInbox);
+app.post('/api/add-task-Upcoming/:current_date', tabs_ctrl.addTaskUpcoming);
