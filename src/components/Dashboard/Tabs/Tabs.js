@@ -17,6 +17,12 @@ class Tabs extends Component {
         completed: false
     }
 
+    toggle = () => {
+        this.setState({
+            completed: !this.state.completed
+        })
+    }
+
     componentDidMount() {
         this.getTabsTasks()
     }
@@ -78,12 +84,21 @@ class Tabs extends Component {
         })
     }
 
+    updateTabsCompleted = async (task_id, completed) => {
+        let res = await axios.put(`/api/update-complete/${task_id}`, {completed})
+        this.setState({
+            sections: res.data,
+            completed: res.data.completed
+        })
+        this.getTabsTasks()
+    }
+
     render() {
         const displaySections = this.state.sections.map((section, i) => {
             return (
                 <div className="card" key={i}>
                     <div className="card-body">
-                        <input type='checkbox' />
+                        <input type='checkbox' checked={section.completed} onClick={() => this.updateTabsCompleted(section.task_id, !section.completed)}/>
                         {section.t_title}
                         <br />
                         {section.notes}

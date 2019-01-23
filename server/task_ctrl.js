@@ -30,17 +30,16 @@ module.exports = {
             const deleteTask = await db.delete_task({task_id, project_id, user_id})
             return res.status(200).send(deleteTask)
         }
-    }
-    // ,
-    // updateTask: async (req, res) => {
-    //     const {t_title, completed, task_date, tag, notes} = req.body;
-    //     const {task_id, t_project_id} = req.params;
-    //     const db = req.app.get('db');
+    },
+    updateTask: async (req, res) => {
+        const {editTitle: t_title, editCompleted: completed, editDate: task_date, editTag: tag, editNotes: notes} = req.body;
+        const {task_id, t_project_id} = req.params;
+        const db = req.app.get('db');
 
-    //     if(req.session.user.id) {
-    //         const {id: user_id} = req.session.user;
-    //         const updateTask = db.update_tasks({t_title, completed,task_date, tag, notes, task_id, t_project_id, user_id})
-    //         return res.status(200).send(updateTask)
-    //     }
-    // }
+        if(req.session.user.id) {
+            const {id: user_id} = req.session.user;
+            const updateTask = await db.update_tasks({t_title, completed,task_date, tag, notes, task_id, t_project_id, user_id})
+            return res.status(200).send(updateTask)
+        }
+    }
 }

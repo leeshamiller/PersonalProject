@@ -42,7 +42,7 @@ app.put('/api/update-project/:project_id&:area_id', pc.updateProject);
 app.get('/api/get-tasks/:id', tc.getTasks);
 app.post(`/api/add-task/:id`, tc.addTask);
 app.delete('/api/delete-task/:project_id&:task_id', tc.deleteTask);
-// app.put('/api/update-project/:t_project_id&:task_id', tc.updateTask);
+app.put('/api/update-task/:t_project_id&:task_id', tc.updateTask);
 
 app.get(`/api/get-Inbox/:id&:current_date`, tabs_ctrl.getInbox);
 app.get('/api/get-Today/:id&:current_date', tabs_ctrl.getToday);
@@ -67,3 +67,5 @@ app.put('/api/update-task-Someday/:task_id&:current_date', tabs_ctrl.updateTaskS
 app.put('/api/update-task-Logbook/:task_id&:current_date', tabs_ctrl.updateTaskLogbook);
 app.put('/api/update-task-Today/:task_id&:current_date', tabs_ctrl.updateTaskToday);
 app.put('/api/update-task-Upcoming/:task_id&:current_date', tabs_ctrl.updateTaskUpcoming);
+
+app.put('/api/update-complete/:task_id', tabs_ctrl.updateCompleted);

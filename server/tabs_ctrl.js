@@ -198,5 +198,16 @@ module.exports = {
             const updateTaskUpcoming = await db.update_task_upcoming({t_user_id, task_id, notes, tag, t_title, current_date})
             return res.status(200).send(updateTaskUpcoming)
         }          
+    },
+    updateCompleted: async (req, res) => {
+        const {id: t_user_id} = req.session.user;
+        const {task_id} = req.params;
+        const {completed} = req.body;
+        const db = req.app.get('db');
+
+        if(t_user_id) {
+            const updateCompleted = await db.update_completed({task_id, completed})
+            res.status(200).send(updateCompleted)
+        }
     }
 }

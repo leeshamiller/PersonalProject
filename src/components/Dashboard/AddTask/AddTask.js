@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
+import UpdateTask from '../Tabs/UpdateTask/UpdateTask';
 
 class AddTask extends Component {
     constructor(props) {
@@ -72,25 +73,34 @@ class AddTask extends Component {
         })
     }
 
-    // updateTask = async (t_project_id, task_id, editTitle, editTag, editNotes, editDate, editCompleted) => {
-    //     let res = await axios.put(`/api/update-project/${t_project_id}&${task_id}`, {editTitle, editTag, editNotes, editDate, editCompleted})
-    //     this.setState({
-    //         tasks: res.data,
-    //         editTitle: '',
-    //         editTag: '',
-    //         editNotes: '',
-    //         editDate: new Date(),
-    //         editCompleted: false
-    //     })
-    // }
+    updateTask = async (t_project_id, task_id, editTitle, editTag, editNotes, editDate, editCompleted) => {
+        let res = await axios.put(`/api/update-task/${t_project_id}&${task_id}`, {editTitle, editTag, editNotes, editDate, editCompleted})
+        this.setState({
+            tasks: res.data,
+            editTitle: '',
+            editTag: '',
+            editNotes: '',
+            editDate: new Date(),
+            editCompleted: false
+        })
+    }
+
+    updateCompleted = async (task_id, completed) => {
+        let res = await axios.put(`/api/update-complete/${task_id}`, {completed})
+        this.setState({
+            tasks: res.data,
+            completed: res.data.completed
+        })
+        this.getTasks()
+    }
 
 
     render() {
         const displayTasks = this.state.tasks.map((task, i) => {
             return (
-                <div key={i}>
-                    <input type='checkbox' value='on' onClick={(e) => this.handleChange('completed', e.target.value)} 
-                    placeholder='completed'
+                <div className='card' key={i}>
+                <div className='card-body'>
+                    <input type='checkbox' checked={task.completed} onClick={() => this.updateCompleted(task.task_id, !task.completed)} 
                     />
                     <h3>Task: {task.t_title}</h3>
                     <h4>{task.notes}</h4>
@@ -99,7 +109,7 @@ class AddTask extends Component {
 
                     <button onClick={() => this.deleteTask(task.project_id, task.task_id)}>delete task</button>
 
-                    {/* <Update 
+                    <UpdateTask 
                     updateTask={this.updateTask}
                     t_project_id={task.t_project_id}
                     task_id={task.task_id}
@@ -108,7 +118,8 @@ class AddTask extends Component {
                     editNotes={this.state.editNotes}
                     editDate={this.state.editDate}
                     editCompleted={this.state.editCompleted}
-                    /> */}
+                    />
+                    </div>
                 </div>
             )
         })
