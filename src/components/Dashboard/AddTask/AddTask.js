@@ -18,8 +18,15 @@ class AddTask extends Component {
             editTag: '',
             editNotes: '',
             editDate: new Date(),
-            editCompleted: false
+            editCompleted: false,
+            toggleAdd: false
         }
+    }
+
+    toggle = () => {
+        this.setState({
+            toggleAdd: !this.state.toggleAdd
+        })
     }
 
     componentDidMount() {
@@ -104,7 +111,7 @@ class AddTask extends Component {
                     />
                     <h3>Task: {task.t_title}</h3>
                     <h4>{task.notes}</h4>
-                    <h5>{task.task_date}</h5>
+                    
                     <h5>Tag: {task.tag}</h5>
 
                     <button onClick={() => this.deleteTask(task.project_id, task.task_id)}>delete task</button>
@@ -125,6 +132,10 @@ class AddTask extends Component {
         })
         return (
             <div>
+                <button onClick={this.toggle}>+</button>
+                {this.state.toggleAdd ? (
+                    <div>
+
                 <button onClick={() => this.addTask(this.props.id)}>Add Task</button>
                 <input 
                 value={this.state.title}
@@ -145,6 +156,12 @@ class AddTask extends Component {
                 onChange={(e) => this.handleChange('notes', e.target.value)}
                 placeholder='notes'
                 />
+                <button onClick={this.toggle}>cancel</button>
+                </div>
+            ) : (
+                null
+            )
+        }
                 {displayTasks}
             </div>
         )
