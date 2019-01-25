@@ -12,10 +12,6 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                Dashboard
-                <br />
-                Ducks ready for takeoff!
-                <br />
                 <Switch>
                     <Route exact path='/private/inbox' component={Inbox} />
                     <Route exact path='/private/today' component={Today} />

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Update from './Update/Update';
 import AddProject from './AddProject/AddProject';
 
+import './Area.scss';
+
 class Area extends Component {
     constructor(props) {
         super(props)
@@ -11,12 +13,19 @@ class Area extends Component {
         this.state = {
             title: '',
             areas: [],
-            editTitle: ''
+            editTitle: '',
+            toggleAdd: false
         }
     }
 
+    toggle = () => {
+        this.setState({
+            toggleAdd: !this.state.toggleAdd
+        })
+    }
+
     componentDidMount() {
-         this.getAreas()
+        this.getAreas()
     }
 
 
@@ -40,6 +49,8 @@ class Area extends Component {
             areas: res.data,
             title: ''
         })
+        this.toggle()
+        this.getAreas()
     }
 
     deleteArea = async (id) => {
@@ -47,34 +58,35 @@ class Area extends Component {
         this.setState({
             areas: res.data
         })
-    }  
-    
+    }
+
     updateArea = async (id, editTitle) => {
-        let res = await axios.put(`/api/update-area/${id}`, {editTitle})
+        let res = await axios.put(`/api/update-area/${id}`, { editTitle })
         this.setState({
             areas: res.data,
             editTitle: ''
         })
-       
+        
+
     }
 
-    
+
     render() {
         let displayAreas = this.state.areas.map((area, i) => {
             return (
-                <div key={i}>
+                <div className='area-main' key={i}>
                     <h1>{area.title}</h1>
 
-                    <button onClick={() => this.deleteArea(area.area_id)}>delete</button>
+                    <span onClick={() => this.deleteArea(area.area_id)}><i className="fas fa-trash-alt"></i></span>
 
                     <Update
-                    area_id={area.area_id}
-                    editTitle={this.state.editTitle}
-                    updateArea={this.updateArea}
+                        area_id={area.area_id}
+                        editTitle={this.state.editTitle}
+                        updateArea={this.updateArea}
                     />
 
-                    <AddProject 
-                    id={area.area_id}
+                    <AddProject
+                        id={area.area_id}
                     />
 
                 </div>
@@ -82,15 +94,24 @@ class Area extends Component {
         })
         return (
             <div>
-                Area
-                <p>
-                    Title:
-                    <input
-                        value={this.state.title}
-                        onChange={(e) => this.handleChange('title', e.target.value)}
-                    />
-                </p>
-                <button onClick={() => this.addArea()}>Add Area</button>
+                <div className='header-container'>
+                    <h1 className='tabs-header'>Area</h1>
+                    <span onClick={this.toggle}>
+                        <i class="fas fa-plus toggleAdd"></i>
+                    </span>
+                </div>
+                {this.state.toggleAdd ? (
+                    <div>
+                        <p>
+                            Title:
+                            <input
+                                value={this.state.title}
+                                onChange={(e) => this.handleChange('title', e.target.value)}
+                            />
+                        </p>
+                        <span onClick={() => this.addArea()}><i className="fas fa-plus"></i>Add Area</span>
+                    </div>
+                ) : (null)}
                 {displayAreas}
             </div>
         )

@@ -53,9 +53,9 @@ class AddTask extends Component {
     }
 
     addTask = async (id) => {
-        const {title, completed, tag, notes} = this.state;
+        const { title, completed, tag, notes } = this.state;
         const date = this.state.date.setHours(23, 59, 59, 999);
-        let res = await axios.post(`/api/add-task/${id}`, {title, completed, date, tag, notes})
+        let res = await axios.post(`/api/add-task/${id}`, { title, completed, date, tag, notes })
         this.setState({
             tasks: res.data,
             title: res.data.t_title,
@@ -71,6 +71,7 @@ class AddTask extends Component {
             tag: '',
             notes: ''
         })
+        this.toggle()
     }
 
     deleteTask = async (project_id, task_id) => {
@@ -81,7 +82,7 @@ class AddTask extends Component {
     }
 
     updateTask = async (t_project_id, task_id, editTitle, editTag, editNotes, editDate, editCompleted) => {
-        let res = await axios.put(`/api/update-task/${t_project_id}&${task_id}`, {editTitle, editTag, editNotes, editDate, editCompleted})
+        let res = await axios.put(`/api/update-task/${t_project_id}&${task_id}`, { editTitle, editTag, editNotes, editDate, editCompleted })
         this.setState({
             tasks: res.data,
             editTitle: '',
@@ -93,7 +94,7 @@ class AddTask extends Component {
     }
 
     updateCompleted = async (task_id, completed) => {
-        let res = await axios.put(`/api/update-complete/${task_id}`, {completed})
+        let res = await axios.put(`/api/update-complete/${task_id}`, { completed })
         this.setState({
             tasks: res.data,
             completed: res.data.completed
@@ -106,62 +107,62 @@ class AddTask extends Component {
         const displayTasks = this.state.tasks.map((task, i) => {
             return (
                 <div className='card' key={i}>
-                <div className='card-body'>
-                    <input type='checkbox' checked={task.completed} onClick={() => this.updateCompleted(task.task_id, !task.completed)} 
-                    />
-                    <h3>Task: {task.t_title}</h3>
-                    <h4>{task.notes}</h4>
-                    
-                    <h5>Tag: {task.tag}</h5>
+                    <div className='card-body'>
+                        <input type='checkbox' checked={task.completed} onClick={() => this.updateCompleted(task.task_id, !task.completed)}
+                        />
+                        <h3>Task: {task.t_title}</h3>
+                        <h4>{task.notes}</h4>
 
-                    <button onClick={() => this.deleteTask(task.project_id, task.task_id)}>delete task</button>
+                        <h5>Tag: {task.tag}</h5>
 
-                    <UpdateTask 
-                    updateTask={this.updateTask}
-                    t_project_id={task.t_project_id}
-                    task_id={task.task_id}
-                    editTitle={this.state.editTitle}
-                    editTag={this.editTag}
-                    editNotes={this.state.editNotes}
-                    editDate={this.state.editDate}
-                    editCompleted={this.state.editCompleted}
-                    />
+                        <span onClick={() => this.deleteTask(task.project_id, task.task_id)}><i class="fas fa-trash-alt"></i></span>
+
+                        <UpdateTask
+                            updateTask={this.updateTask}
+                            t_project_id={task.t_project_id}
+                            task_id={task.task_id}
+                            editTitle={this.state.editTitle}
+                            editTag={this.editTag}
+                            editNotes={this.state.editNotes}
+                            editDate={this.state.editDate}
+                            editCompleted={this.state.editCompleted}
+                        />
                     </div>
                 </div>
             )
         })
         return (
             <div>
-                <button onClick={this.toggle}>+</button>
+                <span onClick={this.toggle}><i class="fas fa-plus"></i>Add Task</span>
                 {this.state.toggleAdd ? (
                     <div>
 
-                <button onClick={() => this.addTask(this.props.id)}>Add Task</button>
-                <input 
-                value={this.state.title}
-                onChange={(e) => this.handleChange('title', e.target.value)}
-                placeholder='title'
-                />
-                <Calendar 
-                onChange={this.onChange}
-                value={this.state.date}
-                />
-                <input 
-                value={this.state.tag}
-                onChange={(e) => this.handleChange('tag', e.target.value)}
-                placeholder='tag'
-                />
-                <input 
-                value={this.state.notes}
-                onChange={(e) => this.handleChange('notes', e.target.value)}
-                placeholder='notes'
-                />
-                <button onClick={this.toggle}>cancel</button>
-                </div>
-            ) : (
-                null
-            )
-        }
+                        <button onClick={() => this.addTask(this.props.id)}>Add Task</button>
+                        <button onClick={this.toggle}>cancel</button>
+                        <input
+                            value={this.state.title}
+                            onChange={(e) => this.handleChange('title', e.target.value)}
+                            placeholder='title'
+                        />
+                        <input
+                            value={this.state.tag}
+                            onChange={(e) => this.handleChange('tag', e.target.value)}
+                            placeholder='tag'
+                        />
+                        <input
+                            value={this.state.notes}
+                            onChange={(e) => this.handleChange('notes', e.target.value)}
+                            placeholder='notes'
+                        />
+                        <Calendar
+                            onChange={this.onChange}
+                            value={this.state.date}
+                        />
+                    </div>
+                ) : (
+                        null
+                    )
+                }
                 {displayTasks}
             </div>
         )

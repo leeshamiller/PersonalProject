@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { getUserData } from '../../../ducks/reducer';
 import Dashboard from '../Dashboard';
+import { Badge } from 'react-bootstrap';
 
 import './Nav.scss';
 
@@ -15,34 +16,59 @@ class Nav extends Component {
     }
 
     render() {
-
+        // console.log(this.props)
         const { id } = this.props.user
         return (
             <div className='nav-container'>
-                { id ? (
+                {id ? (
                     <div id='nav' className='nav'>
-                        <Link to='/private/inbox'>
-                            <button>Inbox</button>
-                        </Link>
-                        <Link to='/private/today'>
-                            <button>Today</button>
-                        </Link>
-                        <Link to='/private/upcoming'>
-                            <button>Upcoming</button>
-                        </Link>
-                        <Link to='/private/someday'>
-                            <button>Someday</button>
-                        </Link>
-                        <Link to='/private/logbook'>
-                            <button>Logbook</button>
-                        </Link>
-                        <Link to='/private/area'>
-                            <button>Area</button>
-                        </Link>
-                        <a href='http://localhost:4321/auth/logout'>
-                            <button>Logout</button>
-                        </a>
-                        <Dashboard />
+                        <div className='nav-buttons'>
+                            <Link to='/private/inbox'>
+                                <div className='button-and-badge'>
+                                    <button className='nav-button'>Inbox</button>
+                                    <Badge>2</Badge>
+                                </div>
+                            </Link>
+                            <Link to='/private/today'>
+                                <div className='button-and-badge'>
+                                    <button className='nav-button'>Today</button>
+                                    <Badge>2</Badge>
+                                </div>
+                            </Link>
+                            <Link to='/private/upcoming'>
+                                <div className='button-and-badge'>
+                                    <button className='nav-button'>Upcoming</button>
+                                    <Badge>2</Badge>
+                                </div>
+                            </Link>
+                            <Link to='/private/someday'>
+                                <div className='button-and-badge'>
+                                    <button className='nav-button'>Someday</button>
+                                    <Badge>2</Badge>
+                                </div>
+                            </Link>
+                            <Link to='/private/logbook'>
+                                <div className='button-and-badge'>
+                                    <button className='nav-button'>Logbook</button>
+                                    <Badge>2</Badge>
+                                </div>
+                            </Link>
+                            <Link to='/private/area'>
+                                <div className='button-and-badge'>
+                                <button className='nav-button'>Area</button>
+                                <Badge></Badge>
+                                </div>
+                            </Link>
+                            <a href='http://localhost:4321/auth/logout'>
+                                <div className='button-and-badge'>
+                                <button className='nav-button'>Logout</button>
+                                <Badge></Badge> 
+                                </div>
+                            </a>
+                        </div>
+                        <div className='main'>
+                            <Dashboard />
+                        </div>
                     </div>
                 ) : <p>Please log in. <Link to='/'>homepage</Link></p>
                 }

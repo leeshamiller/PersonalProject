@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
+
+$textColor: rgb(80, 80, 80);
+
+.tabs-header {
+    font-family: 'Amatic SC', cursive;
+    color: $textColor;
+    font-size: 9vh;
+    cursor: default;
+}
+
+.card-body {
+    // overflow: hidden;
+    // height: 8vh;
+}
+
+.card {
+    margin-bottom: .25rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.add-task-modal {
+    height: 315px;
+    width: 400px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.add-task-icon {
+    margin-top: 2rem;
+    font-size: 1.19rem;
+    margin-left: 0.5rem;
+}
+
+.tabs-calendar {
+    position: absolute;
+}
+
+.task-icons {
+    display: flex;
+    height: 4vh;
+    background-color: yellowgreen;
+    width: 14%;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.task-edits {
+    display: flex;
+    flex-direction: column;
+}

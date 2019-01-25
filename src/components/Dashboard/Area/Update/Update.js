@@ -31,6 +31,7 @@ class UpdateArea extends Component {
         this.setState({
             editTitle: ''
         })
+        this.toggle()
     }
 
     updateProject() {
@@ -38,8 +39,9 @@ class UpdateArea extends Component {
         this.setState({
             editTitle: ''
         })
+        this.toggle()
     }
-    
+
     updateTask() {
         this.props.updateTask(this.props.project_id, this.props.task_id, this.state.editTitle, this.state.editTag, this.state.editNotes, this.state.editDate, this.state.editCompleted)
         this.setState({
@@ -58,27 +60,41 @@ class UpdateArea extends Component {
             <div>
                 {
                     this.props.project_id ? (
-                    <div>
-                        <p>
-                            <input
-                                value={this.state.editTitle}
-                                onChange={(e) => this.handleChange('editTitle', e.target.value)}
-                            />
-                        </p>
-                        <button onClick={() => this.updateProject()}>Edit Project</button>
-                    </div>
-                ) : (
-                        <div>
-                            <p>
 
-                                <input
-                                    value={this.state.editTitle}
-                                    onChange={(e) => this.handleChange('editTitle', e.target.value)}
-                                />
-                            </p>
-                            <button onClick={() => this.updateArea()}>Edit Area</button>
+                        <div>
+                            <span onClick={this.toggle}><i class="fas fa-pencil-alt"></i></span>
+                            {this.state.toggleModal ? (
+                                <div>
+
+                                    <p>
+                                        <input
+                                            value={this.state.editTitle}
+                                            onChange={(e) => this.handleChange('editTitle', e.target.value)}
+                                        />
+                                    </p>
+                                    <span onClick={() => this.updateProject()}><i class="fas fa-pencil-alt"></i>Save Edit</span>
+                                </div>
+                            ) : (null)}
                         </div>
-                    )
+                    ) : (
+                            <div>
+                                <span onClick={this.toggle}><i class="fas fa-pencil-alt"></i></span>
+                                {this.state.toggleModal ? (
+                                    <div>
+
+                                        <p>
+
+                                            <input
+                                                value={this.state.editTitle}
+                                                onChange={(e) => this.handleChange('editTitle', e.target.value)}
+                                            />
+                                        </p>
+                                        <span onClick={() => this.updateArea()}><i class="fas fa-pencil-alt"></i>Save Edit</span>
+                                    </div>
+                                ) : (null)}
+
+                            </div>
+                        )
 
                 }
             </div>

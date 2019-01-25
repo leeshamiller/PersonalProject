@@ -11,8 +11,15 @@ class AddProject extends Component {
         this.state = {
             title: '',
             projects: [],
-            editTitle: ''
+            editTitle: '',
+            toggleAdd: false
         }
+    }
+
+    toggle = () => {
+        this.setState({
+            toggleAdd: !this.state.toggleAdd
+        })
     }
 
     componentDidMount() {
@@ -40,6 +47,7 @@ class AddProject extends Component {
             projects: res.data,
             title: ''
         })
+        this.toggle()
     }
 
     deleteProject = async (project_id, area_id) => {
@@ -63,7 +71,7 @@ class AddProject extends Component {
                 <div key={i}>
                     <h2>{project.project_title}</h2>
 
-                    <button onClick={() => this.deleteProject(project.project_id, project.area_id)}>delete Project</button>
+                    <span onClick={() => this.deleteProject(project.project_id, project.area_id)}><i class="fas fa-trash-alt"></i></span>
 
                     <Update 
                     project_id={project.project_id}
@@ -81,12 +89,20 @@ class AddProject extends Component {
         })
         return (
             <div>
-                <button onClick={() => this.addProject(this.props.id)}>Add Project</button>
-                <input
-                    value={this.state.title}
-                    onChange={(e) => this.handleChange('title', e.target.value)}
-                    />
-                    {displayProjects}
+                <span onClick={this.toggle}>
+                    <i class="fas fa-plus"></i>
+                    Add Project
+                </span>
+                {this.state.toggleAdd ? (
+                    <div>
+                        <button onClick={() => this.addProject(this.props.id)}>Add Project</button>
+                        <input
+                            value={this.state.title}
+                            onChange={(e) => this.handleChange('title', e.target.value)}
+                            />
+                    </div>
+                ) : (null)}
+                {displayProjects}
             </div>
         )
     }

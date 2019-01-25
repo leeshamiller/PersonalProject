@@ -55,7 +55,7 @@ class UpdateTask extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.toggle}>Edit Task</button>
+                <span onClick={this.toggle}><i class="fas fa-pencil-alt"></i></span>
                 {this.state.toggleModal ? (
                     <div>
                         <label>Task Title</label>
