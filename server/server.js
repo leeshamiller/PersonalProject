@@ -28,9 +28,9 @@ massive(CONNECTION_STRING).then((db) => {
     app.listen(SERVER_PORT, () => console.log(`Ducks ready for takeoff! ${SERVER_PORT} blastoff!`))
 })
 
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+app.use( express.static( `${__dirname}/../build` ) );
+
+
 
 app.post('/auth/register', ac.register);
 app.post('/auth/login', ac.login);
