@@ -1,4 +1,6 @@
 require('dotenv').config();
+
+const path = require('path'); // Usually moved to the start of file
 const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
@@ -7,6 +9,8 @@ const area_ctrl = require('./area_ctrl');
 const pc = require('./project_ctrl');
 const tc = require('./task_ctrl');
 const tabs_ctrl = require('./tabs_ctrl');
+
+
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING} = process.env;
 
@@ -23,6 +27,10 @@ massive(CONNECTION_STRING).then((db) => {
     app.set('db', db)
     app.listen(SERVER_PORT, () => console.log(`Ducks ready for takeoff! ${SERVER_PORT} blastoff!`))
 })
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 app.post('/auth/register', ac.register);
 app.post('/auth/login', ac.login);

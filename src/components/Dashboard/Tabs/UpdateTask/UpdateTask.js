@@ -8,12 +8,19 @@ class UpdateTask extends Component {
         editTag: this.props.editTag,
         editNotes: this.props.editNotes,
         editDate: this.props.editDate,
-        editCompleted: this.props.editCompleted
+        editCompleted: this.props.editCompleted,
+        toggleCalendar: false
     }
 
     toggle = () => {
         this.setState({
             toggleModal: !this.state.toggleModal
+        })
+    }
+
+    toggleCalendar = () => {
+        this.setState({
+            toggleCalendar: !this.state.toggleCalendar
         })
     }
 
@@ -51,7 +58,7 @@ class UpdateTask extends Component {
         console.log(this.state)
         this.toggle()
     }
-    
+
     render() {
         return (
             <div>
@@ -75,10 +82,18 @@ class UpdateTask extends Component {
                         />
                         {this.props.t_project_id ? (
                             <div>
-                                <Calendar 
-                                onChange={this.onChange}
-                                value={this.state.date}
-                                />
+                                {this.props.toggleCalendar ? (
+                                    <div>
+                                        <Calendar
+                                            className='tabs-calendar'
+                                            onChange={this.onChange}
+                                            value={this.state.date}
+                                        />
+                                    </div>
+                                ) : (null)}
+                                <label>
+                                    <i class="far fa-calendar-alt" onClick={this.toggleCalendar}></i>
+                                </label>
                                 <button onClick={() => this.updateTask()}>save</button>
                                 <button onClick={this.toggle}>cancel</button>
                             </div>

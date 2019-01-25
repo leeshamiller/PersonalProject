@@ -1,4 +1,7 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
+
+const {LOGOUT_SERVER} = process.env;
 
 module.exports = {
     register: async (req, res) => {
@@ -32,7 +35,7 @@ module.exports = {
     },
     logout: (req, res) => {
         req.session.destroy();
-        res.redirect('http://localhost:3000/#/')
+        res.redirect(LOGOUT_SERVER)
     },
     userData: (req, res) => {
         if (req.session.user) {

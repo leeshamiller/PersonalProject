@@ -59,7 +59,7 @@ class Nav extends Component {
                                 <Badge></Badge>
                                 </div>
                             </Link>
-                            <a href='http://localhost:4321/auth/logout'>
+                            <a href={process.env.REACT_APP_LOGOUT}>
                                 <div className='button-and-badge'>
                                 <button className='nav-button'>Logout</button>
                                 <Badge></Badge> 
