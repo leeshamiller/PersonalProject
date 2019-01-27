@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab');
+$textColor: rgb(80, 80, 80);
+$hoverColor: rgb(161, 124, 84);
+
+.edit-task-div {
+    position: fixed;
+    left: 35%;
+    top: 20%;
+    width: 400px;
+    background-color: rgba(0, 0, 0, .33);
+    height: 400px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Josefin Slab', serif;
+    font-size: 1.4rem;
+}
+
+.task-title-div {
+    margin: .5rem;
+}
+
+.task-tag-div {
+    margin: .5rem;
+}
+
+.task-notes-div {
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+}
+
+.edit-notes-input {
+    height: 17vh;
+    margin-left: .3rem;
+}
+
+.edit-title-input {
+    margin-left: 1.3rem;
+}
+
+.edit-tag-input {
+    margin-left: 1.3rem;
+}
+button {
+    background: none;
+    border: none;
+    color: $textColor;
+    transition: color .5s;
+    font-family: 'Josefin Slab', serif;
+}
+
+button:hover {
+    color: $hoverColor;
+}

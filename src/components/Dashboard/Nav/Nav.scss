@@ -1,29 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
 
-$navColor: rgb(216, 216, 212);
-$hoverColor: rgb(62, 173, 177);
-$hoverColorLight: rgb(73, 206, 211);
-$textColor: rgb(80, 80, 80);
+$navColor: rgb(225, 224, 225);
+$hoverColor: #D3A87B;
+$hoverColorLight: #D3A87B;
+$textColor: #3B3A39;
+// $navColor: rgb(219, 219, 219);
+// $hoverColor: rgb(62, 173, 177);
+// $hoverColorLight: rgb(73, 206, 211);
+// $textColor: rgb(80, 80, 80);
 
 #nav {
     display: flex;
-    height: 100vh;
-    background-color: cadetblue;
-    // background-attachment: fixed;
-    // overflow-y: auto;
+    height: 100%;
+    overflow-y: visible;
+    width: 20%;
+    position: fixed;
 }
 
 .nav-buttons {
-    height: 100vh;
-    width: 20%;
+    height: 100%;
+    width: 100%;
     background-color: $navColor;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    // background-attachment: fixed;
-    // overflow-y: auto;
-    
+    align-items: center;    
 }
 
 .nav-button {
@@ -55,6 +56,7 @@ $textColor: rgb(80, 80, 80);
 .main {
     height: 100vh;
     width: 80%;
+    margin-left: 20%;
 }
 
 .fas {
@@ -64,7 +66,7 @@ $textColor: rgb(80, 80, 80);
 }
 
 .fas:hover {
-    color: black;
+    color: $hoverColor;
 }
 
 .button-and-badge {
@@ -76,4 +78,8 @@ $textColor: rgb(80, 80, 80);
     margin-top: 2rem;
     font-size: 1.19rem;
     margin-left: 0.5rem;
+}
+
+.daddy-div {
+    display: flex;
 }

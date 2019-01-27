@@ -37,7 +37,7 @@ class Auth extends Component {
         return (
             <div className='login-main'>
                 <div className='login-modal'>
-                    <h1>Welcome!</h1>
+                    <h1>Plan your next adventure!</h1>
                     <p>
                         Username:
                     <input

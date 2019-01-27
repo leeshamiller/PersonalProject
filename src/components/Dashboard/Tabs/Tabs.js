@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
-import UpdateTask from './UpdateTask/UpdateTask';
+import { connect } from 'react-redux';
+import { getTabsTasks } from '../../../ducks/reducer';
+import Card from './Card/Card';
 // import { Spring } from 'react-spring';
 
-import './Tabs.scss'
+import './Tabs.scss';
+import './UpdateTask/UpdateTask.scss';
 
 class Tabs extends Component {
 
@@ -14,9 +17,6 @@ class Tabs extends Component {
         tag: '',
         notes: '',
         date: new Date(),
-        editTitle: '',
-        editTag: '',
-        editNotes: '',
         completed: false,
         toggleAdd: false,
         toggleCalendar: false
@@ -50,6 +50,7 @@ class Tabs extends Component {
         this.setState({
             sections: res.data
         })
+        this.props.getTabsTasks(res.data)
     }
 
     handleChange(prop, val) {
@@ -89,18 +90,10 @@ class Tabs extends Component {
         this.setState({
             sections: res.data
         })
+        this.getTabsTasks()
     }
 
-    updateTabsTask = async (task_id, editNotes, editTag, editTitle) => {
-        const current_date = new Date().setHours(23, 59, 59, 999);
-        let res = await axios.put(`/api/update-task-${this.props.header}/${task_id}&${current_date}`, { editNotes, editTag, editTitle })
-        this.setState({
-            sections: res.data,
-            editTitle: '',
-            editTag: '',
-            editNotes: ''
-        })
-    }
+    
 
     updateTabsCompleted = async (task_id, completed) => {
         let res = await axios.put(`/api/update-complete/${task_id}`, { completed })
@@ -115,55 +108,60 @@ class Tabs extends Component {
 
         const displaySections = this.state.sections.map((section, i) => {
             return (
-                <div className="card" key={i}>
-                    <div className="card-body">
-                        <input type='checkbox' checked={section.completed} onClick={() => this.updateTabsCompleted(section.task_id, !section.completed)} />
-                        {section.t_title}
-                        <br />
-                        {section.notes}
-                        <span onClick={() => this.deleteTabsTask(section.task_id)}><i className="fas fa-trash-alt"></i></span>
-                        <UpdateTask
-                            task_id={section.task_id}
-                            editNotes={this.state.editNotes}
-                            editTag={this.state.editTag}
-                            editTitle={this.state.editTitle}
-                            updateTabsTask={this.updateTabsTask}
-                        />
-                    </div>
-                </div>
+                <Card 
+                key={i}
+                completed={section.completed}
+                updateTabsCompleted={() => this.updateTabsCompleted(section.task_id, !section.completed)}
+                t_title={section.t_title}
+                notes={section.notes}
+                deleteTabsTask={() => this.deleteTabsTask(section.task_id)}
+                task_id={section.task_id}
+                header={this.props.header}
+                sections={this.state.sections}
+                i={i}
+                getTabsTasks={() => this.getTabsTasks()}
+                />
             )
         })
         return (
             <div className='main-tabs'>
                 <div className='header-container'>
                     <h1 className='tabs-header'>{this.props.header}</h1>
-                    <span onClick={this.toggleAdd}><i className="fas fa-plus add-task-icon"></i></span>
+                    <div onClick={this.toggleAdd}><i className="fas fa-plus add-task-icon"></i></div>
                 </div>
                 {displaySections}
                 {this.state.toggleAdd ? (
 
-                    <div className='add-task-modal'>
-                    <div className='task-edits'>
-                        <label>Task Title:
+                    <div className='edit-div-container'>
+                        <div className='edit-task-div'>
+                        <div className='task-title-div'>
+                            <label className=''>Title:
                         <input
-                                type='text'
-                                onChange={(e) => this.handleChange('t_title', e.target.value)}
-                                value={this.state.t_title}
-                            />
-                        </label>
-                        <label>Task Tag:
+                                    type='text'
+                                    className='edit-title-input'
+                                    onChange={(e) => this.handleChange('t_title', e.target.value)}
+                                    value={this.state.t_title}
+                                />
+                            </label>
+                                </div>
+                                <div className='task-tag-div'>
+                            <label>Tag:
                         <input
-                                onChange={(e) => this.handleChange('tag', e.target.value)}
-                                value={this.state.tag}
-                            />
-                        </label>
-                        <label>Task Notes:
-                        <input
-                                onChange={(e) => this.handleChange('notes', e.target.value)}
-                                value={this.state.notes}
-                            />
-                        </label>
-                        </div>
+                                    onChange={(e) => this.handleChange('tag', e.target.value)}
+                                    className='edit-tag-input'
+                                    value={this.state.tag}
+                                />
+                            </label>
+                                </div>
+                                <div className='edit-notes-input'>
+                            <label>Notes:
+                        <textarea
+                                    onChange={(e) => this.handleChange('notes', e.target.value)}
+                                    className='edit-notes-input'
+                                    value={this.state.notes}
+                                ></textarea>
+                            </label>
+                            </div>
                         <div className='task-icons'>
                             <span onClick={() => this.addTabsTask()}><i className="fas fa-plus"></i></span>
                             <label>
@@ -176,10 +174,11 @@ class Tabs extends Component {
                                     className='tabs-calendar'
                                     onChange={this.onChange}
                                     value={this.state.date}
-                                />
+                                    />
 
                             </div>
                         ) : (null)}
+                        </div>
                     </div>
                 ) : (
                         null
@@ -189,5 +188,6 @@ class Tabs extends Component {
     }
 }
 
+const mapStateToProps = (reduxState) => reduxState;
 
-export default Tabs;
+export default connect(mapStateToProps, { getTabsTasks })(Tabs);

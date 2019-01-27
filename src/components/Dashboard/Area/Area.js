@@ -14,13 +14,20 @@ class Area extends Component {
             title: '',
             areas: [],
             editTitle: '',
-            toggleAdd: false
+            toggleAdd: false,
+            toggleIcons: false
         }
     }
 
     toggle = () => {
         this.setState({
             toggleAdd: !this.state.toggleAdd
+        })
+    }
+
+    toggleIcons = () => {
+        this.setState({
+            toggleIcons: !this.state.toggleIcons
         })
     }
 
@@ -66,8 +73,6 @@ class Area extends Component {
             areas: res.data,
             editTitle: ''
         })
-        
-
     }
 
 
@@ -76,14 +81,19 @@ class Area extends Component {
             return (
                 <div className='area-main' key={i}>
                     <h1>{area.title}</h1>
-
-                    <span onClick={() => this.deleteArea(area.area_id)}><i className="fas fa-trash-alt"></i></span>
-
-                    <Update
-                        area_id={area.area_id}
-                        editTitle={this.state.editTitle}
-                        updateArea={this.updateArea}
-                    />
+                    <div onClick={this.toggleIcons}><i class="fas fa-ellipsis-v"></i></div>
+                    {this.state.toggleIcons ? (
+                        <div>
+                            <span onClick={() => this.deleteArea(area.area_id)}><i className="fas fa-trash-alt"></i></span>
+        
+                            <Update
+                                area_id={area.area_id}
+                                editTitle={this.state.editTitle}
+                                updateArea={this.updateArea}
+                            />
+        
+                        </div>
+                    ) : (null)}
 
                     <AddProject
                         id={area.area_id}

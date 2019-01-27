@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 
+import './UpdateTask.scss';
+
 class UpdateTask extends Component {
     state = {
         toggleModal: false,
@@ -55,31 +57,39 @@ class UpdateTask extends Component {
             editDate: new Date(),
             editCompleted: false
         })
-        console.log(this.state)
         this.toggle()
     }
 
     render() {
         return (
-            <div>
-                <span onClick={this.toggle}><i class="fas fa-pencil-alt"></i></span>
+            <div className='edit-div-container'>
+                <span onClick={this.toggle}><i className="fas fa-pencil-alt"></i></span>
                 {this.state.toggleModal ? (
-                    <div>
-                        <label>Task Title</label>
+                    <div className='edit-task-div'>
+                    <div className='task-title-div'>
+                        <label>Title: </label>
                         <input
+                            className='edit-title-input'
                             value={this.state.editTitle}
                             onChange={(e) => this.handleChange('editTitle', e.target.value)}
                         />
-                        <label>Task Tag</label>
+                        </div>
+                        <div className='task-tag-div'>
+                        <label>Tag: </label>
                         <input
+                            className='edit-tag-input'
                             value={this.state.editTag}
                             onChange={(e) => this.handleChange('editTag', e.target.value)}
                         />
-                        <label>Task Notes</label>
-                        <input
+                        </div>
+                        <div className='task-notes-div'>
+                        <label>Notes: </label>
+                        <textarea
+                            className='edit-notes-input'
                             value={this.state.editNotes}
                             onChange={(e) => this.handleChange('editNotes', e.target.value)}
-                        />
+                        ></textarea>
+                        </div>
                         {this.props.t_project_id ? (
                             <div>
                                 {this.props.toggleCalendar ? (

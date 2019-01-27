@@ -108,12 +108,10 @@ class AddTask extends Component {
             return (
                 <div className='card' key={i}>
                     <div className='card-body'>
-                        <input type='checkbox' checked={task.completed} onClick={() => this.updateCompleted(task.task_id, !task.completed)}
+                        <input type='checkbox' checked={task.completed} onChange={() => this.updateCompleted(task.task_id, !task.completed)}
                         />
                         <h3>Task: {task.t_title}</h3>
                         <h4>{task.notes}</h4>
-
-                        <h5>Tag: {task.tag}</h5>
 
                         <span onClick={() => this.deleteTask(task.project_id, task.task_id)}><i class="fas fa-trash-alt"></i></span>
 

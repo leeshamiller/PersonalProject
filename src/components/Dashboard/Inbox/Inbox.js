@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tabs from '../Tabs/Tabs';
 
+
 class Inbox extends Component {
     render() {
         return (
@@ -12,5 +13,6 @@ class Inbox extends Component {
         )
     }
 }
+
 
 export default Inbox;

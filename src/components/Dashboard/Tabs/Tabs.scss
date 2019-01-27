@@ -10,8 +10,8 @@ $textColor: rgb(80, 80, 80);
 }
 
 .card-body {
-    // overflow: hidden;
-    // height: 8vh;
+    padding: 0.25rem;
+    margin: 0.5rem;
 }
 
 .card {
@@ -33,25 +33,66 @@ $textColor: rgb(80, 80, 80);
 }
 
 .add-task-icon {
-    margin-top: 2rem;
+    // margin-top: 2rem;
     font-size: 1.19rem;
     margin-left: 0.5rem;
 }
 
 .tabs-calendar {
     position: absolute;
+    right: -186px;
+    top: 230px;
 }
 
 .task-icons {
     display: flex;
     height: 4vh;
-    background-color: yellowgreen;
-    width: 14%;
     justify-content: space-around;
     align-items: flex-start;
+    margin: 1rem;
+    width: 16%;
 }
 
 .task-edits {
     display: flex;
     flex-direction: column;
+}
+
+.main-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.title {
+    margin-left: 1rem;
+    margin-bottom: 0rem;
+    cursor: pointer;
+}
+
+.card-icons {
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.task-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.text {
+    margin: .5rem;
+    margin-left: 2rem;
+    width: 232%;
+    cursor: default;
+}
+
+.header-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 3rem;
 }
