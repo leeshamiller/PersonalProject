@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Update from '../Update/Update';
 import AddTask from '../../AddTask/AddTask';
 
+import './AddProject.scss';
+
 class AddProject extends Component {
     constructor(props) {
         super(props)
@@ -59,7 +61,7 @@ class AddProject extends Component {
         const displayProjects = this.state.projects.map((project, i) => {
             return (
                 <div key={i}>
-                    <h2>{project.project_title}</h2>
+                    <div className='add-project-title'>{project.project_title}</div>
 
                     <span onClick={() => this.deleteProject(project.project_id, project.area_id)}><i className="fas fa-trash-alt"></i></span>
 
