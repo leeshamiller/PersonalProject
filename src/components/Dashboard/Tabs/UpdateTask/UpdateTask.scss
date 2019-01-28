@@ -7,7 +7,7 @@ $hoverColor: rgb(161, 124, 84);
     left: 35%;
     top: 20%;
     width: 400px;
-    background-color: rgba(0, 0, 0, .33);
+    background-color: rgba(241, 243, 245, .9);
     height: 400px;
     z-index: 1;
     display: flex;
@@ -16,6 +16,7 @@ $hoverColor: rgb(161, 124, 84);
     align-items: center;
     font-family: 'Josefin Slab', serif;
     font-size: 1.4rem;
+    border-radius: 5px;
 }
 
 .task-title-div {
@@ -54,4 +55,57 @@ button {
 
 button:hover {
     color: $hoverColor;
+}
+
+.edit-div-container {
+    height: 100%;
+    width: 100%;
+    margin-left: 1rem;
+    // background-color: aquamarine;
+}
+
+// .blurred-div {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     height: 100%;
+//     background-color: aliceblue;
+//     width: 100%;
+
+// }
+
+@media (max-width: 768px) {
+    .edit-task-div {
+      left: 30%;
+      top: 20%;
+      width: 340px;
+      height: 340px;
+    }
+}
+
+@media (max-width: 550px) {
+    .edit-task-div {
+      left: 26%;
+      top: 20%;
+      width: 260px;
+      height: 300px;
+    }
+    .task-title-div {
+        width: 90%;
+
+    }
+    .edit-title-input {
+        width: 65%;
+        height: 10%;
+        margin-top: 0.8rem;
+    }
+    .task-notes-div {
+        display: flex;
+        width: 98%;
+        height: 16vh;
+        margin-left: .3rem;
+    }
+    .edit-notes-input {
+        height: 12vh;
+    }
 }

@@ -144,7 +144,7 @@ class Tabs extends Component {
                                 />
                             </label>
                                 </div>
-                                <div className='task-tag-div'>
+                                {/* <div className='task-tag-div'>
                             <label>Tag:
                         <input
                                     onChange={(e) => this.handleChange('tag', e.target.value)}
@@ -152,7 +152,7 @@ class Tabs extends Component {
                                     value={this.state.tag}
                                 />
                             </label>
-                                </div>
+                                </div> */}
                                 <div className='edit-notes-input'>
                             <label>Notes:
                         <textarea

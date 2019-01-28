@@ -65,56 +65,58 @@ class UpdateTask extends Component {
             <div className='edit-div-container'>
                 <span onClick={this.toggle}><i className="fas fa-pencil-alt"></i></span>
                 {this.state.toggleModal ? (
-                    <div className='edit-task-div'>
-                    <div className='task-title-div'>
-                        <label>Title: </label>
-                        <input
-                            className='edit-title-input'
-                            value={this.state.editTitle}
-                            onChange={(e) => this.handleChange('editTitle', e.target.value)}
-                        />
-                        </div>
-                        <div className='task-tag-div'>
-                        <label>Tag: </label>
-                        <input
-                            className='edit-tag-input'
-                            value={this.state.editTag}
-                            onChange={(e) => this.handleChange('editTag', e.target.value)}
-                        />
-                        </div>
-                        <div className='task-notes-div'>
-                        <label>Notes: </label>
-                        <textarea
-                            className='edit-notes-input'
-                            value={this.state.editNotes}
-                            onChange={(e) => this.handleChange('editNotes', e.target.value)}
-                        ></textarea>
-                        </div>
-                        {this.props.t_project_id ? (
-                            <div>
-                                {this.props.toggleCalendar ? (
-                                    <div>
-                                        <Calendar
-                                            className='tabs-calendar'
-                                            onChange={this.onChange}
-                                            value={this.state.date}
-                                        />
-                                    </div>
-                                ) : (null)}
-                                <label>
-                                    <i class="far fa-calendar-alt" onClick={this.toggleCalendar}></i>
-                                </label>
-                                <button onClick={() => this.updateTask()}>save</button>
-                                <button onClick={this.toggle}>cancel</button>
+                    <div className='blurred-div'>
+                        <div className='edit-task-div'>
+                            <div className='task-title-div'>
+                                <label>Title: </label>
+                                <input
+                                    className='edit-title-input'
+                                    value={this.state.editTitle}
+                                    onChange={(e) => this.handleChange('editTitle', e.target.value)}
+                                />
                             </div>
-                        ) : (
+                            {/* <div className='task-tag-div'>
+                                <label>Tag: </label>
+                                <input
+                                    className='edit-tag-input'
+                                    value={this.state.editTag}
+                                    onChange={(e) => this.handleChange('editTag', e.target.value)}
+                                />
+                            </div> */}
+                            <div className='task-notes-div'>
+                                <label>Notes: </label>
+                                <textarea
+                                    className='edit-notes-input'
+                                    value={this.state.editNotes}
+                                    onChange={(e) => this.handleChange('editNotes', e.target.value)}
+                                ></textarea>
+                            </div>
+                            {this.props.t_project_id ? (
                                 <div>
-                                    <button onClick={() => this.updateTabsTask()}>save</button>
+                                    {this.props.toggleCalendar ? (
+                                        <div>
+                                            <Calendar
+                                                className='tabs-calendar'
+                                                onChange={this.onChange}
+                                                value={this.state.date}
+                                            />
+                                        </div>
+                                    ) : (null)}
+                                    <label>
+                                        <i class="far fa-calendar-alt" onClick={this.toggleCalendar}></i>
+                                    </label>
+                                    <button onClick={() => this.updateTask()}>save</button>
                                     <button onClick={this.toggle}>cancel</button>
                                 </div>
+                            ) : (
+                                    <div>
+                                        <button onClick={() => this.updateTabsTask()}>save</button>
+                                        <button onClick={this.toggle}>cancel</button>
+                                    </div>
 
-                            )
-                        }
+                                )
+                            }
+                        </div>
                     </div>
                 ) : (
                         null

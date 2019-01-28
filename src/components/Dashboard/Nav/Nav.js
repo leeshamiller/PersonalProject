@@ -22,7 +22,7 @@ class Nav extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-        if (this.props.sections.length !== prevProps.inbox.length && this.props.location.pathname === '/private/inbox') {
+        if (this.props.sections.length !== prevProps.inbox.length && this.props.location.pathname === '/private') {
             this.getInbox()
             this.getLogbook()
         }
@@ -86,7 +86,7 @@ class Nav extends Component {
                     <div className='daddy-div'>
                     <div id='nav' className='nav'>
                         <div className='nav-buttons'>
-                            <Link to='/private/inbox'>
+                            <Link to='/private'>
                                 <div className='button-and-badge'>
                                     <button className='nav-button'>Inbox</button>
                                     <Badge>{this.props.inbox.length}</Badge>
