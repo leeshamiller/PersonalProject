@@ -60,8 +60,9 @@ class AddProject extends Component {
     render() {
         const displayProjects = this.state.projects.map((project, i) => {
             return (
-                <div key={i}>
+                <div className='add-project-div' key={i}>
                     <p className='add-project-title'>{project.project_title}</p>
+                    <div className='add-project-icons'>
 
                     <span onClick={() => this.deleteProject(project.project_id, project.area_id)}><i className="fas fa-trash-alt"></i></span>
 
@@ -72,6 +73,7 @@ class AddProject extends Component {
                     updateProject={this.updateProject}
                     />
 
+                    </div>
                     <AddTask 
                     id={project.project_id}
                     />
@@ -80,8 +82,7 @@ class AddProject extends Component {
             )
         })
         return (
-            <div>
-                
+            <div className='projects-div'>
                 {displayProjects}
             </div>
         )
