@@ -15,3 +15,17 @@
     font-size: 1.4rem;
     font-family: 'Josefin Slab', serif;
 }
+
+.add-task-title {
+    font-size: 1.5rem;
+}
+
+.add-task-notes {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.add-task-icons {
+    display: flex;
+    flex-direction: row;
+}

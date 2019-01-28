@@ -119,10 +119,11 @@ class AddTask extends Component {
                     <div className='card-body'>
                         <input type='checkbox' checked={task.completed} onChange={() => this.updateCompleted(task.task_id, !task.completed)}
                         />
-                        <h3>Task: {task.t_title}</h3>
-                        <h4>{task.notes}</h4>
+                        <p className='add-task-title'>Task: {task.t_title}</p>
+                        <p className='add-task-notes'>{task.notes}</p>
 
-                        <span onClick={() => this.deleteTask(task.project_id, task.task_id)}><i className="fas fa-trash-alt"></i></span>
+                        <div className='add-task-icons'>
+                        <div onClick={() => this.deleteTask(task.project_id, task.task_id)}><i className="fas fa-trash-alt"></i></div>
 
                         <UpdateTask
                             updateTask={this.updateTask}
@@ -134,6 +135,7 @@ class AddTask extends Component {
                             editDate={this.state.editDate}
                             editCompleted={this.state.editCompleted}
                         />
+                        </div>
                     </div>
                 </div>
             )
