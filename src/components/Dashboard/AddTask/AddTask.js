@@ -115,7 +115,7 @@ class AddTask extends Component {
     render() {
         const displayTasks = this.state.tasks.map((task, i) => {
             return (
-                <div className='card' key={i}>
+                <div className='card' id='card-id' key={i}>
                     <div className='card-body'>
                         <input type='checkbox' checked={task.completed} onChange={() => this.updateCompleted(task.task_id, !task.completed)}
                         />
