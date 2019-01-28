@@ -61,8 +61,8 @@ class UpdateArea extends Component {
                 {
                     this.props.project_id ? (
 
-                        <div>
-                            <span onClick={this.toggle}><i class="fas fa-pencil-alt"></i></span>
+                        <div className='area-icon'>
+                            <span onClick={this.toggle}><i className="fas fa-pencil-alt"></i></span>
                             {this.state.toggleModal ? (
                                 <div>
 

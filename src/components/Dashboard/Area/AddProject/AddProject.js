@@ -40,16 +40,6 @@ class AddProject extends Component {
         })
     }
 
-    addProject = async (id) => {
-        const { title } = this.state;
-        let res = await axios.post(`/api/add-project/${id}`, { title })
-        this.setState({
-            projects: res.data,
-            title: ''
-        })
-        this.toggle()
-    }
-
     deleteProject = async (project_id, area_id) => {
         let res = await axios.delete(`/api/delete-project/${project_id}&${area_id}`)
         this.setState({
@@ -71,7 +61,7 @@ class AddProject extends Component {
                 <div key={i}>
                     <h2>{project.project_title}</h2>
 
-                    <span onClick={() => this.deleteProject(project.project_id, project.area_id)}><i class="fas fa-trash-alt"></i></span>
+                    <span onClick={() => this.deleteProject(project.project_id, project.area_id)}><i className="fas fa-trash-alt"></i></span>
 
                     <Update 
                     project_id={project.project_id}
@@ -89,19 +79,7 @@ class AddProject extends Component {
         })
         return (
             <div>
-                <span onClick={this.toggle}>
-                    <i class="fas fa-plus"></i>
-                    Add Project
-                </span>
-                {this.state.toggleAdd ? (
-                    <div>
-                        <button onClick={() => this.addProject(this.props.id)}>Add Project</button>
-                        <input
-                            value={this.state.title}
-                            onChange={(e) => this.handleChange('title', e.target.value)}
-                            />
-                    </div>
-                ) : (null)}
+                
                 {displayProjects}
             </div>
         )

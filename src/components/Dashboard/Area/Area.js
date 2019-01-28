@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import Update from './Update/Update';
-import AddProject from './AddProject/AddProject';
 
 import './Area.scss';
+import ThreeDots from './ThreeDots/ThreeDots';
 
 class Area extends Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class Area extends Component {
             areas: [],
             editTitle: '',
             toggleAdd: false,
-            toggleIcons: false
+            
         }
     }
 
@@ -25,18 +24,11 @@ class Area extends Component {
         })
     }
 
-    toggleIcons = () => {
-        this.setState({
-            toggleIcons: !this.state.toggleIcons
-        })
-    }
-
     componentDidMount() {
         this.getAreas()
     }
 
-
-    async getAreas() {
+    getAreas = async () => {
         let res = await axios.get(`/api/get-areas/${this.props.user.id}`)
         this.setState({
             areas: res.data
@@ -75,31 +67,21 @@ class Area extends Component {
         })
     }
 
+    
+
 
     render() {
         let displayAreas = this.state.areas.map((area, i) => {
             return (
-                <div className='area-main' key={i}>
-                    <h1>{area.title}</h1>
-                    <div onClick={this.toggleIcons}><i class="fas fa-ellipsis-v"></i></div>
-                    {this.state.toggleIcons ? (
-                        <div>
-                            <span onClick={() => this.deleteArea(area.area_id)}><i className="fas fa-trash-alt"></i></span>
-        
-                            <Update
-                                area_id={area.area_id}
-                                editTitle={this.state.editTitle}
-                                updateArea={this.updateArea}
-                            />
-        
-                        </div>
-                    ) : (null)}
-
-                    <AddProject
-                        id={area.area_id}
-                    />
-
-                </div>
+                <ThreeDots 
+                key={i}
+                i={i}
+                title={area.title}
+                deleteArea={() => this.deleteArea(area.area_id)}
+                area_id={area.area_id}
+                updateArea={this.updateArea}
+                getAreas={this.getAreas}
+                />
             )
         })
         return (
@@ -107,7 +89,7 @@ class Area extends Component {
                 <div className='header-container'>
                     <h1 className='tabs-header'>Area</h1>
                     <span onClick={this.toggle}>
-                        <i class="fas fa-plus toggleAdd"></i>
+                        <i className="fas fa-plus toggleAdd"></i>
                     </span>
                 </div>
                 {this.state.toggleAdd ? (
@@ -117,7 +99,7 @@ class Area extends Component {
                             <input
                                 value={this.state.title}
                                 onChange={(e) => this.handleChange('title', e.target.value)}
-                            />
+                                />
                         </p>
                         <span onClick={() => this.addArea()}><i className="fas fa-plus"></i>Add Area</span>
                     </div>

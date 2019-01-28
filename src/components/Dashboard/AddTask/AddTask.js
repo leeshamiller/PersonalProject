@@ -3,6 +3,8 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import UpdateTask from '../Tabs/UpdateTask/UpdateTask';
 
+import './AddTask.scss';
+
 class AddTask extends Component {
     constructor(props) {
         super(props)
@@ -19,13 +21,20 @@ class AddTask extends Component {
             editNotes: '',
             editDate: new Date(),
             editCompleted: false,
-            toggleAdd: false
+            toggleAdd: false,
+            toggleCalendar: false
         }
     }
 
     toggle = () => {
         this.setState({
             toggleAdd: !this.state.toggleAdd
+        })
+    }
+
+    toggleCalendar = () => {
+        this.setState({
+            toggleCalendar: !this.state.toggleCalendar
         })
     }
 
@@ -113,7 +122,7 @@ class AddTask extends Component {
                         <h3>Task: {task.t_title}</h3>
                         <h4>{task.notes}</h4>
 
-                        <span onClick={() => this.deleteTask(task.project_id, task.task_id)}><i class="fas fa-trash-alt"></i></span>
+                        <span onClick={() => this.deleteTask(task.project_id, task.task_id)}><i className="fas fa-trash-alt"></i></span>
 
                         <UpdateTask
                             updateTask={this.updateTask}
@@ -131,34 +140,45 @@ class AddTask extends Component {
         })
         return (
             <div>
-                <span onClick={this.toggle}><i class="fas fa-plus"></i>Add Task</span>
+                <span onClick={this.toggle}><i className="fas fa-plus"></i>Add Task</span>
                 {this.state.toggleAdd ? (
-                    <div>
-
-                        <button onClick={() => this.addTask(this.props.id)}>Add Task</button>
-                        <button onClick={this.toggle}>cancel</button>
+                    <div className='add-task-popup'>
+                        <label>
+                            Title:
                         <input
                             value={this.state.title}
                             onChange={(e) => this.handleChange('title', e.target.value)}
-                            placeholder='title'
                         />
-                        <input
+                        </label>
+                        {/* <input
                             value={this.state.tag}
                             onChange={(e) => this.handleChange('tag', e.target.value)}
                             placeholder='tag'
-                        />
-                        <input
+                        /> */}
+                        <label>
+                            Notes:
+                        <textarea
                             value={this.state.notes}
                             onChange={(e) => this.handleChange('notes', e.target.value)}
-                            placeholder='notes'
                         />
-                        <Calendar
-                            onChange={this.onChange}
-                            value={this.state.date}
-                        />
+                        </label>
+                        <label>
+                            <i class="far fa-calendar-alt" onClick={this.toggleCalendar}></i>
+                        </label>
+                        {this.state.toggleCalendar ? (
+                            <div>
+                                <Calendar
+                                    onChange={this.onChange}
+                                    value={this.state.date}
+                                />
+
+                            </div>
+                        ) : (null)}
+                        <button onClick={() => this.addTask(this.props.id)}>Add Task</button>
+                        <button onClick={this.toggle}>cancel</button>
                     </div>
                 ) : (
-                        null
+                    null
                     )
                 }
                 {displayTasks}
