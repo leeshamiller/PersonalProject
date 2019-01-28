@@ -13,7 +13,7 @@ class Dashboard extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path='/private/inbox' component={Inbox} />
+                    <Route exact path='/private' component={Inbox} />
                     <Route exact path='/private/today' component={Today} />
                     <Route exact path='/private/upcoming' component={Upcoming} />
                     <Route exact path='/private/someday' component={Someday} />
