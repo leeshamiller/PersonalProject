@@ -61,7 +61,7 @@ class AddProject extends Component {
         const displayProjects = this.state.projects.map((project, i) => {
             return (
                 <div key={i}>
-                    <div className='add-project-title'>{project.project_title}</div>
+                    <p className='add-project-title'>{project.project_title}</p>
 
                     <span onClick={() => this.deleteProject(project.project_id, project.area_id)}><i className="fas fa-trash-alt"></i></span>
 
