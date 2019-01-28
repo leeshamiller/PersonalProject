@@ -37,26 +37,30 @@ class Auth extends Component {
         return (
             <div className='login-main'>
                 <div className='login-modal'>
-                    <h1>Plan your next adventure!</h1>
-                    <p>
+                    <h1 className='auth-header'>Plan your next adventure!</h1>
+                    <p className='auth-text'>
                         Username:
                     <input
+                            className='auth-input user'
                             type='text'
                             value={this.state.username}
                             onChange={(e) => this.handleChange('username', e.target.value)}
                         />
                     </p>
-                    <p>
+                    <p className='auth-text'>
                         Password:
                     <input
+                            className='auth-input pass'
                             type='password'
                             value={this.state.password}
                             onChange={(e) => this.handleChange('password', e.target.value)}
                         />
                     </p>
-                    <button onClick={() => this.login()} >Login</button>
-                    <p>New user?</p>
-                    <button onClick={() => this.register()} >Register</button>
+                    <button className='auth-login' onClick={() => this.login()} >Login</button>
+                    <div className='new-user-div'>
+                    <p className='auth-text new-user'>New user?</p>
+                    <button className='auth-register' onClick={() => this.register()} >Create Account</button>
+                    </div>
                 </div>
             </div>
         )

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:700');
+
+$fontFamily: 'Amatic SC', cursive;
+
 .login-main {
     height: 100vh;
     // background: rgba(255, 255, 255, 0.73);
@@ -11,9 +15,9 @@
 }
 
 .login-modal {
-    background-color: rgba(225, 224, 225, 0.63);
-    height: 315px;
-    width: 315px;
+    background-color: rgba(225, 224, 225, 0.83);
+    height: 435px;
+    width: 435px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,4 +25,55 @@
     border-radius: 30px;
     text-align: center;
     color: rgb(59, 58, 57);
+}
+
+.auth-header {
+    font-size: 7vh;
+    margin-bottom: 1.5rem;
+    font-family: $fontFamily;
+    cursor: default;
+}
+
+.auth-text {
+    font-size: 1.7rem;
+    font-family: $fontFamily;
+    width: 100%;
+    cursor: default;
+}
+
+.auth-login {
+    font-size: 2.4rem;
+    font-family: $fontFamily;
+
+}
+
+.new-user {
+    margin: 0;
+    font-family: $fontFamily;
+
+}
+
+.auth-input {
+    border-radius: 5px;
+    width: 50%;
+}
+
+.new-user-div {
+    border: 1px solid;
+    border-radius: 5px;
+    width: 60%;
+}
+
+.auth-register {
+    font-family: $fontFamily;
+    font-size: 1.2rem;
+
+}
+
+.pass {
+    margin-left: 15px;
+}
+
+.user {
+    margin-left: 6px;
 }
