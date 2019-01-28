@@ -170,6 +170,7 @@ class AddTask extends Component {
                         {this.state.toggleCalendar ? (
                             <div>
                                 <Calendar
+                                    className='add-calendar'
                                     onChange={this.onChange}
                                     value={this.state.date}
                                 />

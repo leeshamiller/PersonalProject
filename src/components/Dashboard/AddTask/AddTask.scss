@@ -34,3 +34,29 @@
 #card-id {
     margin-left: 0;
 }
+
+.add-calendar {
+    position: absolute;
+    right: -186px;
+    top: 200px;
+}
+
+@media (max-width: 768px) {
+    .add-calendar {
+        position: absolute;
+        right: 0px;
+        top: 200px;
+    }
+}
+
+@media (max-width: 550px) {
+    .add-task-popup {
+        left: 20%;
+        width: 300px;
+    }
+    .add-calendar {
+        position: absolute;
+        right: 0px;
+        top: 200px;
+    }
+}
